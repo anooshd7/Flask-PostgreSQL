@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskApp</title>
+    <style>
+        .content{
+            margin-left:75px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        <label>Enter your email:</label>
+        <input type="text" name="email"/>
+
+        <label>Enter your name:</label>
+        <input type="text" name="name"/>
+
+        <button type="submit">Submit</button>
+
+        <a href="{{ url_for('index') }}">Back to Home Page</a>
+    </form>
+</body>
+</html>

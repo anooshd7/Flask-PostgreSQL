@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskApp</title>
+    <style>
+        .content{
+            margin-left:75px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('post_emails') }}">Emails</a>
+    </nav>
+    <hr>
+    <div class="content">
+        {% for email in emails %}
+            <div>
+                <h1>{{email[1]}}</h1>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
