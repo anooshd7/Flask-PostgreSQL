@@ -7,19 +7,30 @@
         .content{
             margin-left:75px;
         }
+        .form1{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
     </style>
 </head>
 <body>
-    <form method="post">
-        <label>Enter your email:</label>
-        <input type="text" name="email"/>
+    <div class="form1">
+        <form method="post">
+            <label>Enter your email:</label>
+            <input type="text" name="email"/>
 
-        <label>Enter your name:</label>
-        <input type="text" name="name"/>
+            <label>Enter your name:</label>
+            <input type="text" name="name"/>
 
-        <button type="submit">Submit</button>
+            <button type="submit" >Submit</button>
 
-        <a href="{{ url_for('index') }}">Back to Home Page</a>
-    </form>
+        </form>
+    </div>
 </body>
 </html>
