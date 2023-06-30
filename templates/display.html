@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskApp</title>
+
+    <style>
+        .content {
+            margin-left: 75px;
+        }
+
+        .form1 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<form method="POST" action="/display/">
+    <label>Enter your name:</label>
+    <input type="text" name="name"/>
+
+    <label>Enter your car:</label>
+    <input type="text" name="car"/>
+
+    <button type="submit">Submit</button>
+</form>
+
+<div class="info">
+    {% if emails %}
+        {% for email in emails %}
+        <div>
+            <h1>{{ email[0] }}</h1>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No emails found.</p>
+    {% endif %}
+</div>
+</body>
+</html>

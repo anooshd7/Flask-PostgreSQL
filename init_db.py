@@ -18,15 +18,19 @@ cur.execute('DROP TABLE IF EXISTS emails;')
 cur.execute('CREATE TABLE emails (id serial PRIMARY KEY,'
                                  'emailID varchar (150) NOT NULL,'
                                  'name varchar (50) NOT NULL,'
-                                 'date_added date DEFAULT CURRENT_TIMESTAMP);'
+                                 'phone varchar (12) NOT NULL);'
                                  )
-
-# Insert data into the table
-
-cur.execute('INSERT INTO emails (emailID, name)'
-            'VALUES (%s, %s)',
-            ('a@yahoo.com','Bob')
+cur.execute('CREATE TABLE cars (car_id serial PRIMARY KEY,'
+            'id integer NOT NULL,'
+            'cars varchar (50) NOT NULL,'
+            'FOREIGN KEY (id) REFERENCES emails(id) );'
             )
+
+# id_val = 1
+# car_val = "Honda"
+
+# # Execute the INSERT query
+# cur.execute("INSERT INTO cars (id, cars) VALUES (%s, %s);", (id_val, car_val))
 
 conn.commit()
 
