@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FlaskApp</title>
+    <title>Add Car</title>
     <style>
         .content{
             margin-left:75px;
@@ -20,18 +20,12 @@
     </style>
 </head>
 <body>
-    <div class="form1">
-        <form method="post">
-            <label>Enter your email:</label>
-            <input type="text" name="email"/>
+    <div class="form1" action="/add/">
+        <form method="POST">
+            <label>Enter your ID:</label>
+            <input type="text" name="id"/>
 
-            <label>Enter your name:</label>
-            <input type="text" name="name"/>
-
-            <label>Enter your phone number:</label>
-            <input type="text" name="phone"/>
-
-            <label>Enter your car:</label>
+            <label>Enter your new car:</label>
             <input type="text" name="car"/>
 
             <button type="submit" >Submit</button>

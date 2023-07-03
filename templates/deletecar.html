@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Display Cars</title>
+    <title>Delete Car</title>
+
     <style>
         .content {
             margin-left: 75px;
@@ -21,25 +22,16 @@
     </style>
 </head>
 <body>
-<form method="POST" action="/display/">
+<form method="POST" action="/delete/">
     <label>Enter your ID:</label>
     <input type="text" name="id"/>
+
+    <label>Enter the car to be deleted:</label>
+    <input type="text" name="car"/>
 
     <button type="submit">Submit</button>
 </form>
 
-<div class="info">
-    {% if cars %}
-        <h1>Cars owned by ID: {{ id }}</h1>
-        <ul>
-        {% for car in cars %}
-            <li>{{ car[0] }}</li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No cars found for ID: {{ id }}</p>
-    {% endif %}
-</div>
 
 </body>
 </html>
