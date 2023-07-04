@@ -12,7 +12,7 @@ def get_db_connection():
                             )
     return conn
 
-class Update(Resource):
+class ChangeCar(Resource):
     """Updates car based on ID and car name."""
 
     def get(self):

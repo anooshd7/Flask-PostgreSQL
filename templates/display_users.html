@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Car</title>
-
+    <title>Display Cars</title>
     <style>
         .content {
             margin-left: 75px;
@@ -22,16 +21,24 @@
     </style>
 </head>
 <body>
-<form method="POST" action="/cars/remove">
-    <label>Enter your ID:</label>
-    <input type="text" name="id"/>
-
-    <label>Enter the car to be deleted:</label>
-    <input type="text" name="car"/>
+<form method="POST" action="/users/display">
+    <label>Enter car ID:</label>
+    <input type="text" name="car_id"/>
 
     <button type="submit">Submit</button>
 </form>
 
+<div class="info">
+    {% if users %}
+        <ul>
+        {% for user in users %}
+            <h> User: {{ user[0] }}</h>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No users found for car ID: {{ car_id }}</p>
+    {% endif %}
+</div>
 
 </body>
 </html>

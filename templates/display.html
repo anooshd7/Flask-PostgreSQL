@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-<form method="POST" action="/display/">
+<form method="POST" action="/cars/display">
     <label>Enter your ID:</label>
     <input type="text" name="id"/>
 
@@ -37,7 +37,7 @@
         {% endfor %}
         </ul>
     {% else %}
-        <p>No cars found for ID: {{ id }}</p>
+        <p>No cars found for ID {{ id }}</p>
     {% endif %}
 </div>
 

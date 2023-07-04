@@ -12,7 +12,7 @@ def get_db_connection():
                             )
     return conn
 
-class Add(Resource):
+class AddCar(Resource):
     """Email Class in flask-restful."""
 
     def get(self):
@@ -27,18 +27,17 @@ class Add(Resource):
 
         conn = get_db_connection()
         cur = conn.cursor()
-
-        # Check if the provided ID exists in the users table
-        cur.execute('SELECT id FROM users WHERE id = %s', (input_id))
-        row = cur.fetchone()
-        if row:
-            # ID exists
-            cur.execute('INSERT INTO cars (id, cars) VALUES (%s, %s)',
+        cur.execute('INSERT INTO cars (id, cars) VALUES (%s, %s)',
                         (input_id, car))
-            conn.commit()
+        conn.commit()
+
+        # Insert the relationship into the junction table
+        cur.execute('INSERT INTO users_cars (user_id, car_id) VALUES (%s, (SELECT car_id FROM cars WHERE id = %s))',
+                        (input_id, input_id))
+        conn.commit()
 
         cur.close()
         conn.close()
 
         headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('add.html',row=row), 200, headers)
+        return make_response(render_template('add.html'), 200, headers)

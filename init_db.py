@@ -26,6 +26,15 @@ cur.execute('CREATE TABLE cars (car_id serial PRIMARY KEY,'
             'FOREIGN KEY (id) REFERENCES users(id) );'
             )
 
+# Junction table for many-many relationship
+cur.execute('CREATE TABLE users_cars (user_id integer NOT NULL,'
+            'car_id integer NOT NULL,'
+            'FOREIGN KEY (car_id) REFERENCES cars(car_id),'
+            'FOREIGN KEY (user_id) REFERENCES users(id),'
+            'PRIMARY KEY (user_id, car_id) );'
+            )
+
+
 # Triggers to delete user if all their cars are deleted
 cur.execute('''
     CREATE OR REPLACE FUNCTION delete_user_if_no_cars()
