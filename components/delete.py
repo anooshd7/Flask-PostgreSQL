@@ -1,16 +1,7 @@
 from flask_restful import Resource
 from flask import request, render_template, make_response
-import psycopg2
-import os
 
-def get_db_connection():
-    """Get postgres connection."""
-    conn = psycopg2.connect(host='localhost',
-                            database='flask_db2',
-                            user=os.getenv('DB_USERNAME'),
-                            password=os.getenv('DB_PASSWORD')
-                            )
-    return conn
+from postgres_connection import get_db_connection
 
 class RemoveCar(Resource):
     def get(self):

@@ -1,16 +1,7 @@
 from flask_restful import Resource
 from flask import request, render_template, make_response
-import psycopg2
-import os
 
-def get_db_connection():
-    """Get postgres connection."""
-    conn = psycopg2.connect(host='localhost',
-                            database='flask_db2',
-                            user=os.getenv('DB_USERNAME'),
-                            password=os.getenv('DB_PASSWORD')
-                            )
-    return conn
+from postgres_connection import get_db_connection
 
 class DisplayUsers(Resource):
     """Displays cars owned by the user based on ID."""
@@ -27,7 +18,7 @@ class DisplayUsers(Resource):
         cur = conn.cursor()
         cur.execute('SELECT users.name' 
                     ' FROM users'
-                    ' JOIN users_cars ON users.id = users_cars.user_id'
+                    ' INNER JOIN users_cars ON users.id = users_cars.user_id'
                     ' WHERE users_cars.car_id = %s;',
                     (car_id))
         users = cur.fetchall()

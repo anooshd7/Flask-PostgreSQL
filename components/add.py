@@ -1,16 +1,8 @@
 from flask_restful import Resource
 from flask import request, render_template, make_response
-import psycopg2
-import os
 
-def get_db_connection():
-    """Get postgres connection."""
-    conn = psycopg2.connect(host='localhost',
-                            database='flask_db2',
-                            user=os.getenv('DB_USERNAME'),
-                            password=os.getenv('DB_PASSWORD')
-                            )
-    return conn
+from postgres_connection import get_db_connection
+
 
 class AddCar(Resource):
     """Email Class in flask-restful."""
@@ -32,8 +24,8 @@ class AddCar(Resource):
         conn.commit()
 
         # Insert the relationship into the junction table
-        cur.execute('INSERT INTO users_cars (user_id, car_id) VALUES (%s, (SELECT car_id FROM cars WHERE id = %s))',
-                        (input_id, input_id))
+        cur.execute('INSERT INTO users_cars (user_id, car_id) VALUES (%s, (SELECT car_id FROM cars WHERE id = %s AND cars = %s))',
+                        (input_id, input_id,car))
         conn.commit()
 
         cur.close()

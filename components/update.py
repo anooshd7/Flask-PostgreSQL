@@ -1,16 +1,6 @@
 from flask_restful import Resource
 from flask import request, render_template, make_response
-import psycopg2
-import os
-
-def get_db_connection():
-    """Get postgres connection."""
-    conn = psycopg2.connect(host='localhost',
-                            database='flask_db2',
-                            user=os.getenv('DB_USERNAME'),
-                            password=os.getenv('DB_PASSWORD')
-                            )
-    return conn
+from postgres_connection import get_db_connection
 
 class ChangeCar(Resource):
     """Updates car based on ID and car name."""
@@ -29,9 +19,8 @@ class ChangeCar(Resource):
         cur = conn.cursor()
         cur.execute('SELECT car_id FROM cars WHERE id = %s AND cars = %s', (id, car))
         car_id = cur.fetchone()
-        if car_id:
-            cur.execute('UPDATE cars SET cars = %s WHERE car_id = %s', (updated_car, car_id))
-            conn.commit()
+        cur.execute('UPDATE cars SET cars = %s WHERE car_id = %s', (updated_car, car_id))
+        conn.commit()
         cur.close()
         conn.close()
         headers = {'Content-Type': 'text/html'}

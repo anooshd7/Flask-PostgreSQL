@@ -13,8 +13,7 @@ conn = psycopg2.connect(
 # Open a cursor to perform database operations
 cur = conn.cursor()
 
-# Execute a command: this creates a new table
-cur.execute('DROP TABLE IF EXISTS users;')
+# Users and Cars tables
 cur.execute('CREATE TABLE users (id serial PRIMARY KEY,'
                                  'emailID varchar (150) NOT NULL,'
                                  'name varchar (50) NOT NULL,'
@@ -23,14 +22,14 @@ cur.execute('CREATE TABLE users (id serial PRIMARY KEY,'
 cur.execute('CREATE TABLE cars (car_id serial PRIMARY KEY,'
             'id integer NOT NULL,'
             'cars varchar (50) NOT NULL,'
-            'FOREIGN KEY (id) REFERENCES users(id) );'
+            'FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE );'
             )
 
 # Junction table for many-many relationship
 cur.execute('CREATE TABLE users_cars (user_id integer NOT NULL,'
             'car_id integer NOT NULL,'
-            'FOREIGN KEY (car_id) REFERENCES cars(car_id),'
-            'FOREIGN KEY (user_id) REFERENCES users(id),'
+            'FOREIGN KEY (car_id) REFERENCES cars(car_id) ON DELETE CASCADE,'
+            'FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,'
             'PRIMARY KEY (user_id, car_id) );'
             )
 
@@ -62,8 +61,6 @@ cur.execute('''
     EXECUTE FUNCTION delete_user_if_no_cars();
     ''')
 
-
 conn.commit()
-
 cur.close()
 conn.close()

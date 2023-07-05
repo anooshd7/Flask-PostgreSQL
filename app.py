@@ -54,8 +54,8 @@ One to many (One user has many cars)- DONE
 List all cars owned by a user - DONE
 Each class in its own file - DONE
 
-change routes
-many to many relationship
+change routes - DONE
+many to many relationship - DONE
 Joins
 
 '''
